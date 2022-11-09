@@ -28,22 +28,24 @@ def checkEquals(users_1, users_all):
             indexes.append(i)
 
 
-    return uncracked,indexes
+    return indexes
 
 def main(): 
     cracked_passwords = open("senhas_quebradas.txt", "r")
     all_passwords = open("usuarios_senhascodificadas.txt", "r")
     all_passwords_lines = all_passwords.readlines()
+    all_passwords.seek(0,0)
 
-    uncracked_passwords = open("senhas_não_quabradas.txt", "w")
+    uncracked_passwords = open("senhas_não_quebradas.txt", "w")
 
     cracked_users = getUsers(cracked_passwords)
     all_users = getUsers(all_passwords)
 
-    uncracked_users, indexes = checkEquals(cracked_users, all_users)
+    indexes = checkEquals(cracked_users, all_users)
 
-    for i in range(len(uncracked_users)):
-        uncracked_passwords.write(uncracked_users[i]+":"+all_passwords_lines[indexes[i]]+"\n")
+
+    for i in range(len(indexes)):
+        uncracked_passwords.write(all_passwords_lines[indexes[i]]+"\n")
 
     cracked_passwords.close()
     all_passwords.close()
