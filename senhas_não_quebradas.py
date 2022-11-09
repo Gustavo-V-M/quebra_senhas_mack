@@ -46,7 +46,7 @@ def main():
 
     if len(indexes) > 0:
         for i in range(len(indexes)):
-            uncracked_passwords.write(all_passwords_lines[indexes[i]]+"\n")
+            uncracked_passwords.write(all_passwords_lines[indexes[i]])
         print("ok!")
     
     else:
