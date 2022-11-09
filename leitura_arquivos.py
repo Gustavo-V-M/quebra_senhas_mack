@@ -24,6 +24,12 @@ def test_word(word, passwords):
         if coded_word == passwords[w]:
             return w
     
+def check_permutation(permutation, passwords, arq, users):
+    for i in range(len(permutation)):
+        if test_word(permutation[i], passwords) != None:
+            index = test_word(permutation[i], passwords) 
+            arq.write(users[index]+":"+permutation[i]+"\n")
+
 
 def permute_2(words):
     X = []
@@ -69,35 +75,20 @@ def main():
         passwords[i] = passwords_users[i][1]
 
     
-    for i in range(len(words)):
-        if test_word(words[i], passwords) != None:
-            index = test_word(words[i], passwords) 
-            cracked_passwords.write(users[index]+":"+words[i]+"\n")
+    check_permutation(words, passwords, cracked_passwords, users)
             
     permutation_2 = permute_2(words)
-    for i in range(len(permutation_2)):
-        if test_word(permutation_2[i], passwords) != None:
-            index = test_word(permutation_2[i], passwords) 
-            cracked_passwords.write(users[index]+":"+permutation_2[i]+"\n")
-    
+    check_permutation(permutation_2, passwords, cracked_passwords, users)
+
     permutation_3 = permute_rest(permutation_2, words)
-    for i in range(len(permutation_3)):
-        if test_word(permutation_3[i], passwords) != None:
-            index = test_word(permutation_3[i], passwords) 
-            cracked_passwords.write(users[index]+":"+permutation_3[i]+"\n")
+    check_permutation(permutation_3, passwords, cracked_passwords, users)
     
     permutation_4 = permute_rest(permutation_3, words)
-    for i in range(len(permutation_4)):
-        if test_word(permutation_4[i], passwords) != None:
-            index = test_word(permutation_4[i], passwords) 
-            cracked_passwords.write(users[index]+"+"+permutation_4[i]+"\n")
+    check_permutation(permutation_4, passwords, cracked_passwords, users)
             
     
     permutation_5 = permute_rest(permutation_4, words)
-    for i in range(len(permutation_5)):
-        if test_word(permutation_5[i], passwords) != None:
-            index = test_word(permutation_5[i], passwords) 
-            cracked_passwords.write(users[index]+":"+permutation_5[i]+"\n")
+    check_permutation(permutation_5, passwords, cracked_passwords, users)
     
     print("ok!")
     cracked_passwords.close()
