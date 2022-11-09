@@ -1,9 +1,5 @@
 import quebra_senhas
 
-#TODO
-#arrumar codigo de checar senhas
-#escrever os nos arquivos
-
 def get_words(arq_path):
     arq = open(arq_path, "r")
     lines = arq.readlines()
