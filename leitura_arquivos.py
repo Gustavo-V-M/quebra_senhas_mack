@@ -99,6 +99,7 @@ def main():
             index = test_word(permutation_5[i], passwords) 
             cracked_passwords.write(users[index]+":"+permutation_5[i])
     
-
+    print("ok!")
+    cracked_passwords.close()
 if __name__ == '__main__':
     main()
