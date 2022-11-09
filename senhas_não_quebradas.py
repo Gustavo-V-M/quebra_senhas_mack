@@ -44,14 +44,18 @@ def main():
     indexes = checkEquals(cracked_users, all_users)
 
 
-    for i in range(len(indexes)):
-        uncracked_passwords.write(all_passwords_lines[indexes[i]]+"\n")
+    if len(indexes) > 0:
+        for i in range(len(indexes)):
+            uncracked_passwords.write(all_passwords_lines[indexes[i]]+"\n")
+        print("ok!")
+    
+    else:
+        print("Não existem senhas a serem quebradas!")
 
     cracked_passwords.close()
     all_passwords.close()
     uncracked_passwords.close()
 
-    print("ok!")
 
 if __name__ == "__main__":
     main()
